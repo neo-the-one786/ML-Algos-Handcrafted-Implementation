@@ -24,29 +24,39 @@ class LinearRegression:
         self.w = self.b = 0
         self.costs = []
 
-    def modelFunc(self, x):
-        yHat = np.dot(self.w, x) + self.b
-        return yHat
+    def modelFunc(self, x_i):
+        yHat_i = self.w * x_i + self.b
+        return yHat_i
 
-    def lossFunc(self, x, y):
-        yHat = self.modelFunc(x)
-        l = np.square(np.subtract(yHat, y))
-        return l
+    def lossFunc(self, x_i, y_i):
+        yHat_i = self.modelFunc(x_i)
+        l_i = (yHat_i - y_i) ** 2
+        return l_i
 
     def costFunc(self, x, y):
-        l = self.lossFunc(x, y)
-        J_wb = (1 / 2) * np.mean(l)
+        m = x.shape[0]
+        J_wb = 0
+        for i in range(m):
+            l_i = self.lossFunc(x[i], y[i])
+            J_wb += l_i
+        J_wb *= 1 / (2 * m)
         return J_wb
 
-    def error(self, x, y):
-        yHat = self.modelFunc(x)
-        e = np.subtract(yHat, y)
-        return e
+    def error(self, x_i, y_i):
+        yHat_i = self.modelFunc(x_i)
+        e_i = yHat_i - y_i
+        return e_i
 
     def gradient(self, x, y):
-        e = self.error(x, y)
-        dJ_dw = np.mean(e * x)
-        dJ_db = np.mean(e)
+        m = x.shape[0]
+        e, ex = 0, 0
+        for i in range(m):
+            e_i = self.error(x[i], y[i])
+            e += e_i
+            e_i_x_i = e_i * x[i]
+            ex += e_i_x_i
+        dJ_dw = (1 / m) * ex
+        dJ_db = (1 / m) * e
         return dJ_dw, dJ_db
 
     def fit(self, x, y, epochs, learning_rate):
