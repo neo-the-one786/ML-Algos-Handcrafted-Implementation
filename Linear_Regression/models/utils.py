@@ -51,33 +51,33 @@ class LinearRegression:
         dJ_db = np.mean(e)
         return dJ_dw, dJ_db
 
-    def fit(self, x, y, epochs, learning_rate, shuffle=False, batch_size=None):
-        x = x.to_numpy()
-        y = y.to_numpy()
-        a, bat = learning_rate, batch_size
-        for _ in range(epochs):
-            if shuffle:
-                rndIds = np.random.permutation(x.shape[0])
-                x, y = x[rndIds], y[rndIds]
-            m = x.shape[0]
-            for i in range(0, m, m or bat):
-                if batch_size is not None and shuffle:
-                    xNew, yNew = x[i:min(i + bat, m)], y[i:min(i + bat, m)]
-                elif shuffle:
-                    xNew, yNew = x[i:i + 1], y[i:i + 1]
-                else:
-                    xNew, yNew = x.copy(), y.copy()
-                dJ_dw, dJ_db = self.gradient(xNew, yNew)
-                self.w -= a * dJ_dw
-                self.b -= a * dJ_db
-            currCost = self.costFunc(x, y)
-            self.costs.append(currCost)
+    # def fit(self, x, y, epochs, learning_rate, shuffle=False, batch_size=None):
+    #     x = x.to_numpy()
+    #     y = y.to_numpy()
+    #     a, bat = learning_rate, batch_size
+    #     for _ in range(epochs):
+    #         if shuffle:
+    #             rndIds = np.random.permutation(x.shape[0])
+    #             x, y = x[rndIds], y[rndIds]
+    #         m = x.shape[0]
+    #         for i in range(0, m, m or bat):
+    #             if batch_size is not None and shuffle:
+    #                 xNew, yNew = x[i:min(i + bat, m)], y[i:min(i + bat, m)]
+    #             elif shuffle:
+    #                 xNew, yNew = x[i:i + 1], y[i:i + 1]
+    #             else:
+    #                 xNew, yNew = x.copy(), y.copy()
+    #             dJ_dw, dJ_db = self.gradient(xNew, yNew)
+    #             self.w -= a * dJ_dw
+    #             self.b -= a * dJ_db
+    #         currCost = self.costFunc(x, y)
+    #         self.costs.append(currCost)
 
     def fit(self, x, y, epochs, learning_rate, min_delta=0.0001, max_iter=100, shuffle=False, batch_size=None, patience=5):
         x = x.to_numpy()
         y = y.to_numpy()
         a, bat = learning_rate, batch_size
-        bestCost = math.inf
+        bestCost = float("inf")
         patienceCnt = 0
         for _ in range(epochs):
             if shuffle:
@@ -123,7 +123,7 @@ class LinearRegression:
 
     def scatterPlot(self, x, y, subtitle):
         fig, ax = plt.subplots()
-        ax.set_title("Linear Regression Fit on Dataset")
+        ax.set_title("Linear_Regression Fit on Dataset")
         fig.suptitle(subtitle)
         ax.set_xlabel("Input Features (x)")
         ax.set_ylabel("Output Labels (y)")

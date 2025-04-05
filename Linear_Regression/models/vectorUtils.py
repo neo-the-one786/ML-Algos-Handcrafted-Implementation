@@ -34,17 +34,19 @@ class LinearRegression:
         return l
 
     def costFunc(self, x, y):
-        J_wb = (1 / 2) * np.mean(self.lossFunc(x, y))
+        l = self.lossFunc(x, y)
+        J_wb = (1 / 2) * np.mean(l)
         return J_wb
 
-    def error(self, x_i, y_i):
-        yHat_i = self.modelFunc(x_i)
-        e_i = np.subtract(yHat_i, y_i)
-        return e_i
+    def error(self, x, y):
+        yHat = self.modelFunc(x)
+        e = np.subtract(yHat, y)
+        return e
 
     def gradient(self, x, y):
-        dJ_dw = np.mean(x * self.error(x, y))
-        dJ_db = np.mean(self.error(x, y))
+        e = self.error(x, y)
+        dJ_dw = np.mean(e * x)
+        dJ_db = np.mean(e)
         return dJ_dw, dJ_db
 
     def fit(self, x, y, epochs, learning_rate):
@@ -90,18 +92,18 @@ class LinearRegression:
                 self.b -= a * dJ_db
             self.costs.append(self.costFunc(x, y))
 
-    def plotCost(self, epochs, subtitle):
+    def plotCost(self, subtitle):
         fig, ax = plt.subplots()
         ax.set_title("Cost vs Epoch")
         fig.suptitle(subtitle)
         ax.set_xlabel("Epoch")
         ax.set_ylabel("Cost")
-        ax.plot(list(range(1, epochs + 1)), self.costs)
+        ax.plot(list(range(1, len(self.costs) + 1)), self.costs)
         plt.show()
 
     def scatterPlot(self, x, y, subtitle):
         fig, ax = plt.subplots()
-        ax.set_title("Linear Regression Fit on Dataset")
+        ax.set_title("Linear_Regression Fit on Dataset")
         fig.suptitle(subtitle)
         ax.set_xlabel("Input Features (x)")
         ax.set_ylabel("Output Labels (y)")

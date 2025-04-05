@@ -4,6 +4,13 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Linear Regression" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Logistic Regression" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Logistic Regression/models" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Decision Trees" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Decision Trees/models" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Decision_Trees" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Linear_Regression" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Logistic_Regression" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="MLAssigment" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

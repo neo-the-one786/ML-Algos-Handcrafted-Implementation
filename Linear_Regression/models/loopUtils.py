@@ -113,7 +113,7 @@ class LinearRegression:
 
     def scatterPlot(self, x, y, subtitle):
         fig, ax = plt.subplots()
-        ax.set_title("Linear Regression Fit on Dataset")
+        ax.set_title("Linear_Regression Fit on Dataset")
         fig.suptitle(subtitle)
         ax.set_xlabel("Input Features (x)")
         ax.set_ylabel("Output Labels (y)")
